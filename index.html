@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Materiales</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ======================= HEADER ======================= -->
+    <header class="header">
+        <h1 class="header__title">CALCULADORA DE MATERIALES</h1>
+    </header>
+
+    <div id="aviso" class="aviso" role="status" aria-live="polite" hidden></div>
+    <main class="contenido">
+
+        <!-- ======================= INICIAR SESIÓN ======================= -->
+        <section id="pantalla-login" class="pantalla activa">
+            <div class="tarjeta tarjeta--login">
+                <h2 class="tarjeta__titulo">INICIAR SESIÓN</h2>
+
+                <form class="formulario" id="form-login" autocomplete="off">
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="login-usuario">Usuario</label>
+                        <input class="campo__input" type="text" id="login-usuario" name="usuario">
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="login-password">Contraseña</label>
+                        <input class="campo__input" type="password" id="login-password" name="password">
+                    </div>
+
+                    <a class="enlace enlace--izquierda" href="#" data-ir="recuperar">¿Olvidaste tu contraseña?</a>
+
+                    <div class="acciones">
+                        <button class="btn" type="submit">Iniciar Sesión</button>
+                    </div>
+                </form>
+
+                <p class="pie-tarjeta">
+                    ¿No tienes cuenta? <a class="enlace" href="#" data-ir="registro">Regístrate</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- ======================= RECUPERAR CONTRASEÑA ======================= -->
+        <section id="pantalla-recuperar" class="pantalla">
+            <div class="tarjeta tarjeta--recuperar">
+                <h2 class="tarjeta__titulo">Recuperar Contraseña</h2>
+
+                <form class="formulario" id="form-recuperar" autocomplete="off">
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="recuperar-email">Email</label>
+                        <input class="campo__input" type="email" id="recuperar-email" name="email">
+                    </div>
+
+                    <div class="acciones">
+                        <button class="btn" type="submit">Obtener</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ======================= REGISTRATE ======================= -->
+        <section id="pantalla-registro" class="pantalla">
+            <div class="tarjeta tarjeta--registro">
+                <h2 class="tarjeta__titulo">REGISTRATE</h2>
+
+                <form class="formulario" id="form-registro" autocomplete="off">
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="registro-nombre">Nombre y Apellido</label>
+                        <input class="campo__input" type="text" id="registro-nombre" name="nombre">
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="registro-email">Email</label>
+                        <input class="campo__input" type="email" id="registro-email" name="email">
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="registro-usuario">Usuario</label>
+                        <input class="campo__input" type="text" id="registro-usuario" name="usuario">
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="registro-password">Contraseña</label>
+                        <input class="campo__input" type="password" id="registro-password" name="password">
+                    </div>
+
+                    <div class="acciones">
+                        <button class="btn" type="submit">Crear Cuenta</button>
+                    </div>
+                </form>
+
+                <p class="pie-tarjeta">
+                    ¿Ya tienes cuenta? <a class="enlace" href="#" data-ir="login">Iniciar Sesión</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- ======================= MENÚ ======================= -->
+        <section id="pantalla-menu" class="pantalla">
+            <div class="tarjeta tarjeta--menu">
+                <h2 class="tarjeta__titulo">MENÚ</h2>
+
+                <p class="perfil-activo">Sesión: <strong id="usuario-activo">—</strong></p>
+                <nav class="menu">
+                    <a class="menu__boton" href="#" data-ir="muro">Muro de ladrillo</a>
+                    <a class="menu__boton" href="#" data-ir="viga">Viga de hormigón</a>
+                    <a class="menu__boton" href="#" data-ir="columna">Columnas de hormigón</a>
+                    <a class="menu__boton" href="#" data-ir="contrapiso">Contrapisos</a>
+                    <a class="menu__boton" href="#" data-ir="techo">Techo</a>
+                    <a class="menu__boton" href="#" data-ir="pisos">Pisos</a>
+                    <a class="menu__boton" href="#" data-ir="pintura">Pintura</a>
+                </nav>
+
+                <div class="menu__pie">
+                    <a class="enlace" href="#" id="cerrar-sesion">Salir</a>
+                </div>
+                <section class="historial" aria-labelledby="historial-titulo">
+                    <div class="historial__cabecera">
+                        <h3 id="historial-titulo">Mis cálculos</h3>
+                        <button class="btn-secundario" type="button" id="actualizar-historial">Actualizar</button>
+                    </div>
+                    <div id="historial-lista" class="historial__lista">
+                        <p class="historial__vacio">Inicia sesión para ver tus cálculos guardados.</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- ======================= MURO DE LADRILLO ======================= -->
+        <section id="pantalla-muro" class="pantalla">
+            <a class="volver" href="#" data-ir="menu">&larr; Volver al menú</a>
+
+            <div class="tarjeta tarjeta--calculadora">
+                <h2 class="tarjeta__titulo">MURO DE LADRILLO</h2>
+
+                <form class="formulario" id="form-muro" autocomplete="off">
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="muro-espesor">Espesor Del Muro (cm)</label>
+                        <select class="campo__input campo__select" id="muro-espesor" name="espesor">
+                            <option value="20">20cm</option>
+                            <option value="30">30cm</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="muro-largo">Largo (m)</label>
+                        <input class="campo__input" type="number" step="any" id="muro-largo" name="largo">
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="muro-alto">Alto (m)</label>
+                        <input class="campo__input" type="number" step="any" id="muro-alto" name="alto">
+                    </div>
+
+                    <div class="acciones">
+                        <button class="btn" type="submit">Calcular</button>
+                    </div>
+                </form>
+
+                <div class="resultado" id="resultado-muro" hidden>
+                    <p class="resultado__titulo">Resultado:</p>
+                    <div class="resultado__lineas"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= VIGA DE HORMIGÓN ======================= -->
+        <section id="pantalla-viga" class="pantalla">
+            <a class="volver" href="#" data-ir="menu">&larr; Volver al menú</a>
+
+            <div class="tarjeta tarjeta--calculadora">
+                <h2 class="tarjeta__titulo">viga de hormigón</h2>
+
+                <form class="formulario" id="form-viga" autocomplete="off">
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="viga-largo">Largo de la viga(m)</label>
+                        <input class="campo__input" type="number" step="any" id="viga-largo" name="largo">
+                    </div>
+
+                    <div class="acciones">
+                        <button class="btn" type="submit">Calcular</button>
+                    </div>
+                </form>
+
+                <div class="resultado" id="resultado-viga" hidden>
+                    <p class="resultado__titulo">Resultado:</p>
+                    <div class="resultado__lineas"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= COLUMNA DE HORMIGÓN ======================= -->
+        <section id="pantalla-columna" class="pantalla">
+            <a class="volver" href="#" data-ir="menu">&larr; Volver al menú</a>
+
+            <div class="tarjeta tarjeta--calculadora">
+                <h2 class="tarjeta__titulo">Columna de hormigón</h2>
+
+                <form class="formulario" id="form-columna" autocomplete="off">
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="columna-largo">Largo de la columna(m)</label>
+                        <input class="campo__input" type="number" step="any" id="columna-largo" name="largo">
+                    </div>
+
+                    <div class="acciones">
+                        <button class="btn" type="submit">Calcular</button>
+                    </div>
+                </form>
+
+                <div class="resultado" id="resultado-columna" hidden>
+                    <p class="resultado__titulo">Resultado:</p>
+                    <div class="resultado__lineas"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= CONTRAPISOS ======================= -->
+        <section id="pantalla-contrapiso" class="pantalla">
+            <a class="volver" href="#" data-ir="menu">&larr; Volver al menú</a>
+
+            <div class="tarjeta tarjeta--calculadora">
+                <h2 class="tarjeta__titulo">contrapisos</h2>
+
+                <form class="formulario" id="form-contrapiso" autocomplete="off">
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="contrapiso-espesor">Espesor (m)</label>
+                        <input class="campo__input" type="number" step="any" id="contrapiso-espesor" name="espesor">
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="contrapiso-ancho">Ancho (m)</label>
+                        <input class="campo__input" type="number" step="any" id="contrapiso-ancho" name="ancho">
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="contrapiso-largo">Largo (m)</label>
+                        <input class="campo__input" type="number" step="any" id="contrapiso-largo" name="largo">
+                    </div>
+
+                    <div class="acciones">
+                        <button class="btn" type="submit">Calcular</button>
+                    </div>
+                </form>
+
+                <div class="resultado" id="resultado-contrapiso" hidden>
+                    <p class="resultado__titulo">Resultado:</p>
+                    <div class="resultado__lineas"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= TECHO ======================= -->
+        <section id="pantalla-techo" class="pantalla">
+            <a class="volver" href="#" data-ir="menu">&larr; Volver al menú</a>
+
+            <div class="tarjeta tarjeta--calculadora">
+                <h2 class="tarjeta__titulo">Techo</h2>
+
+                <form class="formulario" id="form-techo" autocomplete="off">
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="techo-espesor">Espesor (m²)</label>
+                        <input class="campo__input" type="number" step="any" id="techo-espesor" name="espesor">
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="techo-ancho">Ancho (m²)</label>
+                        <input class="campo__input" type="number" step="any" id="techo-ancho" name="ancho">
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="techo-largo">Largo (m²)</label>
+                        <input class="campo__input" type="number" step="any" id="techo-largo" name="largo">
+                    </div>
+
+                    <div class="acciones">
+                        <button class="btn" type="submit">Calcular</button>
+                    </div>
+                </form>
+
+                <div class="resultado" id="resultado-techo" hidden>
+                    <p class="resultado__titulo">Resultado:</p>
+                    <div class="resultado__lineas"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= PISOS ======================= -->
+        <section id="pantalla-pisos" class="pantalla">
+            <a class="volver" href="#" data-ir="menu">&larr; Volver al menú</a>
+
+            <div class="tarjeta tarjeta--calculadora">
+                <h2 class="tarjeta__titulo">Pisos</h2>
+
+                <form class="formulario" id="form-pisos" autocomplete="off">
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="pisos-ancho">Ancho del paño (m)</label>
+                        <input class="campo__input" type="number" step="any" id="pisos-ancho" name="ancho">
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="pisos-largo">Largo del paño (m)</label>
+                        <input class="campo__input" type="number" step="any" id="pisos-largo" name="largo">
+                    </div>
+
+                    <div class="acciones">
+                        <button class="btn" type="submit">Calcular</button>
+                    </div>
+                </form>
+
+                <div class="resultado" id="resultado-pisos" hidden>
+                    <p class="resultado__titulo">Resultado:</p>
+                    <div class="resultado__lineas"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= PINTURA ======================= -->
+        <section id="pantalla-pintura" class="pantalla">
+            <a class="volver" href="#" data-ir="menu">&larr; Volver al menú</a>
+
+            <div class="tarjeta tarjeta--calculadora">
+                <h2 class="tarjeta__titulo">Pintura</h2>
+
+                <form class="formulario" id="form-pintura" autocomplete="off">
+                    <div class="campo">
+                        <label class="campo__etiqueta" for="pintura-superficie">Superficie del muro (m²)</label>
+                        <input class="campo__input" type="number" step="any" id="pintura-superficie" name="superficie">
+                    </div>
+
+                    <div class="acciones">
+                        <button class="btn" type="submit">Calcular</button>
+                    </div>
+                </form>
+
+                <div class="resultado" id="resultado-pintura" hidden>
+                    <p class="resultado__titulo">Resultado:</p>
+                    <div class="resultado__lineas"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
